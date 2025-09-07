@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package product.v1;
+
+option java_multiple_files = true;
+option java_package = "org.acme.product.proto";
+
+message Product {
+  int64 id = 1;
+  string name = 2;
+  double price = 3;
+}
+
+message CreateProductRequest {
+  string name = 1;
+  double price = 2;
+}
+
+message GetProductRequest {
+  int64 id = 1;
+}
+
+message ListProductsRequest {}
+
+message ListProductsResponse {
+  repeated Product products = 1;
+}
+
+service ProductService {
+  rpc Create(CreateProductRequest) returns (Product);
+  rpc Get(GetProductRequest) returns (Product);
+  rpc List(ListProductsRequest) returns (ListProductsResponse);
+}
